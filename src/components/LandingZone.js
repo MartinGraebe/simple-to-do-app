@@ -33,6 +33,7 @@ class LandingZone extends Component {
      componentDidUpdate(){
     
     }
+    // Display tasks in correct categories
     async updateTasks(){
         const {tasks} = this.state
         let all = [], open = [], working = [], completed = []
@@ -56,13 +57,14 @@ class LandingZone extends Component {
             done: completed
         })
     }
+    // Create local storage of tasks
     saveToLocal = () => {
         const toSave = this.state.tasks
         
         localStorage.setItem('tasklist', JSON.stringify(toSave))
 
     }
-   
+   // Load tasks from local storage (if local storage exists)
    async loadLocal() {
         let stored
         if (localStorage.getItem('tasklist')){
@@ -79,6 +81,7 @@ class LandingZone extends Component {
 
         
     }
+    // Delete local storage and reset all tasks to "To Do"- Category (Eventually Reset and Delete should be separated)
     async resetStorage(){
         localStorage.removeItem('tasklist')
         let all = this.state.tasks
@@ -93,6 +96,7 @@ class LandingZone extends Component {
        this.updateTasks()
 
     }
+    // Add task to list 
     async addTask(event){
         const {tasks} = this.state
         let temp = tasks
@@ -111,6 +115,7 @@ class LandingZone extends Component {
         console.log(this.state.tasks)
         this.updateTasks()
     }
+    // Drag and Drop 
     onDragStart = (event, id) =>{
 
        
@@ -122,6 +127,7 @@ class LandingZone extends Component {
 
     onDrop = (event, category) => {
 
+        // convert data id from data transfer back into integer
         let id = parseInt(event.dataTransfer.getData('id'))
    
        
@@ -145,6 +151,8 @@ class LandingZone extends Component {
         this.saveToLocal()
 
     }
+
+    // Handle input into modal text field
     handleChangeNew(ev) {
     
         this.setState({

@@ -5,6 +5,10 @@ export default class Modal extends Component {
         show: false,
        
     }
+  
+   
+   
+   // Toggle Modal Container
     showModal = e => {
         let temp = this.state.show
         let set = ! temp
