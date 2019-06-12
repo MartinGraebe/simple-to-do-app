@@ -19,7 +19,7 @@
   display: flex;
   
   flex-direction: column;
-  height: 95vh;
+  min-height: 95vh;
   
   padding: 0px;
 
@@ -58,6 +58,7 @@
   flex-direction: row;
   height: 90vh;
   font-size: calc(0.5em + 0.6vw);
+  flex: 1;
   
  
  
@@ -71,6 +72,7 @@
   background-color: #91c4f2;
   border-radius: 5%;
   padding-bottom: 1em;
+
 }
 .common > span {
   color: #92374d;
@@ -116,7 +118,11 @@
   .listContainer {
     flex-direction: column;
   }
-  .toDo{
+  .common{
+    padding-bottom: 30px;
+    width: 100%;
+  }
+/*   .toDo{
     width: 100%;
   }
   .inProgress{
@@ -124,7 +130,7 @@
   }
   .done{
     width: 100%;
-  }
+  } */
   *{
     margin: 2px;
     padding: 2px;
