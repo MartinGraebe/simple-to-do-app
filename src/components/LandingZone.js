@@ -14,6 +14,8 @@ class LandingZone extends Component {
             inProgress: [],
             done: [],
             newToDo: 'To Do',
+            currentTime: '',
+            currentDate: '',
            
         }
         this.onDragStart = this.onDragStart.bind(this)
@@ -24,15 +26,46 @@ class LandingZone extends Component {
         this.resetStorage = this.resetStorage.bind(this)
         this.addTask = this.addTask.bind(this)
         this.handleChangeNew = this.handleChangeNew.bind(this)
+        this.displayTime = this.displayTime.bind(this)
+        
     }
    async componentDidMount(){
         await this.loadLocal()
         this.updateTasks()
+        this.intervalID = setInterval(() => this.displayTime(), 1000)
         
+    }
+    componentWillUnmount(){
+        if (this.intervalID){
+            clearInterval(this.intervalID)
+        }
     }
      componentDidUpdate(){
     
     }
+   // Display Time
+  async displayTime(){
+
+        let today = new Date(),
+        hour = today.getHours(),
+        min = today.getMinutes(),
+        sec = today.getSeconds()
+        if (min < 10) {min = '0' + min}
+        if (sec < 10) {sec = '0' + sec}
+        let time = hour + ':' + min + ':' + sec
+        
+        this.setState({
+            currentTime: time,
+            currentDate: today
+        })
+        
+        
+   }
+
+   
+   
+   
+   
     // Display tasks in correct categories
     async updateTasks(){
         const {tasks} = this.state
@@ -171,7 +204,9 @@ class LandingZone extends Component {
         return(
 
             <div className="mainContainer" >
+                 
                 <div className="menuContainer">
+                    <div>{this.state.currentTime}</div>
                     <div><button className="myButton" onClick={this.resetStorage}>Reset</button></div>
                     <Modal 
                         handleSubmit={this.addTask}

@@ -119,6 +119,9 @@
   .listContainer {
     flex-direction: column;
   }
+  .menuContainer{
+    flex-direction: column;
+  }
   .common{
     padding-bottom: 30px;
     width: 100%;
