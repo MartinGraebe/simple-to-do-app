@@ -13,7 +13,7 @@ class LandingZone extends Component {
             toDo: [],
             inProgress: [],
             done: [],
-            newToDo: 'add here',
+            newToDo: 'To Do',
            
         }
         this.onDragStart = this.onDragStart.bind(this)

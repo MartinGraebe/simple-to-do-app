@@ -40,6 +40,7 @@
 }
 .myButton{
    border-radius: 5%;
+   padding: calc(0.8em + 0.6vw);
 }
 .theModal{
   display: flex;

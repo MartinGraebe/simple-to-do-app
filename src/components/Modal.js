@@ -32,7 +32,7 @@ export default class Modal extends Component {
               {  this.state.show ? <div className="theModal">
                     <form className="modalSubmit" onSubmit={this.props.handleSubmit}>
                         <input type="text" name="toDoItem" defaultValue={this.props.value} onChange={this.props.onChangeValue} />
-                        <input type="submit" className="myButton" value="Add To Do"/>
+                        <input type="submit" className="myButton" value="Add"/>
                     </form>
                     <button className="myButton"
                         onClick={e => {
