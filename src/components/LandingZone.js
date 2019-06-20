@@ -27,15 +27,19 @@ class LandingZone extends Component {
         this.addTask = this.addTask.bind(this)
         this.handleChangeNew = this.handleChangeNew.bind(this)
         this.displayTime = this.displayTime.bind(this)
+
+        this._isMounted = false // avoid memory leak with async functions
         
     }
    async componentDidMount(){
-        await this.loadLocal()
-        this.updateTasks()
+        this._isMounted = true
+        this._isMounted && await this.loadLocal()
+        this._isMounted && this.updateTasks()
         this.intervalID = setInterval(() => this.displayTime(), 1000)
         
     }
     componentWillUnmount(){
+        this._isMounted = false
         if (this.intervalID){
             clearInterval(this.intervalID)
         }
@@ -84,7 +88,7 @@ class LandingZone extends Component {
             
         })
     
-        this.setState({
+     this._isMounted && this.setState({
             toDo: open,
             inProgress: working,
             done: completed
@@ -103,7 +107,7 @@ class LandingZone extends Component {
         if (localStorage.getItem('tasklist')){
 
             stored = JSON.parse(localStorage.getItem('tasklist'))
-            this.setState( {
+            this._isMounted &&   this.setState( {
 
                 tasks: stored
             })
@@ -146,6 +150,7 @@ class LandingZone extends Component {
         })
         event.preventDefault()
         console.log(this.state.tasks)
+        this.saveToLocal()
         this.updateTasks()
     }
     // Drag and Drop 
